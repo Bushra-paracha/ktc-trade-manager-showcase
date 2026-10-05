@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1A4D2E" />
+    <script>
+      // Apply the saved or device theme before the first paint (see src/lib/theme.js).
+      (function () {
+        var theme = 'light';
+        try {
+          if (!/^\/(quote|track)(\/|$)/.test(location.pathname)) {
+            var saved = localStorage.getItem('ktc-theme');
+            theme = saved === 'dark' || saved === 'light' ? saved
+              : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          }
+        } catch (e) { /* keep light */ }
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0E1411');
+      })();
+    </script>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="KTC Trade" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>KTC Trade Manager</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
